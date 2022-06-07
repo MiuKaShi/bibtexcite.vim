@@ -129,6 +129,9 @@ endfunction
 
 function! bibtexcite#showcite(citetype = "pandoc", bang = 0)
     let bib = bibtexcite#getcite(a:citetype, a:bang)
+    let bib = system("bibtool -r ~/paperbib/remove-fields.rsc ", bib)
+    let bib = system("tr -d '{}' ", bib)
+    let bib = join(split(bib,"\t"), "  ")
     if len(bib) > 1
         call bibtexcite#floating_preview#Show(split(bib,'\n'))
     endif
@@ -141,6 +144,7 @@ endfunction
 
 function! bibtexcite#echocite(citetype = "pandoc", bang = 0)
     let bib = bibtexcite#getcite(a:citetype, a:bang)
+    let bib = system("tr -d '{}' " . bib . " ")
     if len(bib) == 1
         echo ""
     else
