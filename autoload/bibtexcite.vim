@@ -114,7 +114,7 @@ function! bibtexcite#getcite(citetype = "pandoc", bang = 0)
         return 0
     endif
     let l:bibtexcite_bibfile = bibtexcite#get_bibfile()
-    let bib = system("bibtool -r biblatex -X " . citekey . " " . l:bibtexcite_bibfile)
+    let bib = system("bibtool -r biblatex -X " . citekey . "$ " . l:bibtexcite_bibfile)
     if len(bib) == 0
         echo "no citation found"
         return 0
