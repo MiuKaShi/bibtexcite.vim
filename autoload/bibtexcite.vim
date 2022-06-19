@@ -139,7 +139,7 @@ endfunction
 
 function! bibtexcite#opencite(citetype = "pandoc", bang = 0)
     let citekey = bibtexcite#getcitekey(a:citetype, a:bang)
-    call jobstart("opcite " . citekey . " ")
+    call jobstart("dmenu_paper " . citekey . " ")
 endfunction
 
 function! bibtexcite#echocite(citetype = "pandoc", bang = 0)
