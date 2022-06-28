@@ -147,7 +147,7 @@ function! bibtexcite#echocite(citetype = "pandoc", bang = 0)
     endif
 endfunction
 
-function! bibtexcite#opencite(citetype = "pandoc", bang = 0)
+function! bibtexcite#openfile(citetype = "pandoc", bang = 0)
     let citekey = bibtexcite#getcitekey(a:citetype, a:bang)
     call jobstart("dmenupaper " . citekey . " ")
 endfunction
