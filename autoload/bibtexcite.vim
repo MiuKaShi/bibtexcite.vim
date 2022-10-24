@@ -68,7 +68,7 @@ function! bibtexcite#fzf(citetype = "pandoc", bang = 0)
         \ 'source': 'bibtex-ls ' . l:bibtexcite_bibfile,
         \ 'sink*': function(sink),
         \ 'up': '40%',
-        \ 'options': '--ansi --layout=reverse-list --multi --prompt '. prompt},
+        \ 'options': '--exact --ansi --layout=reverse-list --multi --prompt '. prompt},
         \ a:bang)
 endfunction
 
