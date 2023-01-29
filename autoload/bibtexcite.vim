@@ -131,7 +131,7 @@ function! bibtexcite#showcite(citetype = "pandoc", bang = 0)
     let bib = bibtexcite#getcite(a:citetype, a:bang)
     let bib = system("bibtool -r ~/papers/bib/remove-fields.rsc ", bib)
     let bib = system("tr -d '{}' ", bib)
-    let bib = system("sed 2d ", bib)
+    let bib = system("awk '/Title/,/Year/' ", bib)
     let bib = join(split(bib,"\t"), "  ")
     if len(bib) > 1
         call bibtexcite#floating_preview#Show(split(bib,'\n'))
