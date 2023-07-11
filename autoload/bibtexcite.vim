@@ -129,12 +129,12 @@ endfunction
 
 function! bibtexcite#showcite(citetype = "pandoc", bang = 0)
     let bib = bibtexcite#getcite(a:citetype, a:bang)
-    " let bib = system("bibtool -r ~/papers/bib/remove-fields.rsc ", bib)
-    " let bib = system("tr -d '{}' ", bib)
-    " let bib = system("awk '/Title/,/Year/' ", bib)
-    " let bib = join(split(bib,"\t"), "  ")
-	let bib = system("bib-txt -o -", bib)
-	let @+=bib
+	let bib_copy = system("bib-txt -o -", bib)
+	let @+=bib_copy
+    let bib = system("bibtool -r ~/papers/bib/remove-fields.rsc ", bib)
+    let bib = system("tr -d '{}' ", bib)
+    let bib = system("awk '/Title/,/Year/' ", bib)
+    let bib = join(split(bib,"\t"), "  ")
     if len(bib) > 1
         call bibtexcite#floating_preview#Show(split(bib,'\n'))
     endif
