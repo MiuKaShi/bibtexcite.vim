@@ -130,7 +130,7 @@ endfunction
 
 function! bibtexcite#showcite(citetype = "pandoc", bang = 0)
     let bib = bibtexcite#getcite(a:citetype, a:bang)
-	let bib = system("bib-txt -o -", bib)
+	let bib = system("bib-txt -", bib)
 	let @+=bib
 	let bib = system("fold -s -w 50", bib)
     if len(bib) > 1
