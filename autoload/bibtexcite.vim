@@ -114,7 +114,8 @@ function! bibtexcite#getcite(citetype = "pandoc", bang = 0)
         return 0
     endif
     let l:bibtexcite_bibfile = bibtexcite#get_bibfile()
-    let bib = system("bibtool -r biblatex -X " . citekey . "$ " . l:bibtexcite_bibfile)
+	let bib  = system('bib-extract ' . l:bibtexcite_bibfile . ' ' . citekey)
+    " let bib = system("bibtool -r biblatex -X " . citekey . "$ " . l:bibtexcite_bibfile)
     if len(bib) == 0
         echo "no citation found"
         return 0
@@ -129,12 +130,9 @@ endfunction
 
 function! bibtexcite#showcite(citetype = "pandoc", bang = 0)
     let bib = bibtexcite#getcite(a:citetype, a:bang)
-	let bib_copy = system("bib-txt -o -", bib)
-	let @+=bib_copy
-    let bib = system("bibtool -r ~/papers/bib/remove-fields.rsc ", bib)
-    let bib = system("tr -d '{}' ", bib)
-    let bib = system("awk '/Title/,/Year/' ", bib)
-    let bib = join(split(bib,"\t"), "  ")
+	let bib = system("bib-txt -o -", bib)
+	let @+=bib
+	let bib = system("fold -s -w 50", bib)
     if len(bib) > 1
         call bibtexcite#floating_preview#Show(split(bib,'\n'))
     endif
