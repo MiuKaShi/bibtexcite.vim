@@ -153,5 +153,10 @@ function! bibtexcite#openfile(citetype = "pandoc", bang = 0)
     call jobstart("dmenupaper " . citekey . " ")
 endfunction
 
+function! bibtexcite#edit(citetype = "pandoc", bang = 0)
+    let citekey = bibtexcite#getcitekey(a:citetype, a:bang)
+	call jobstart('bib-edit ' . l:bibtexcite_bibfile . ' ' . citekey)
+endfunction
+
 let &cpo = s:cpo_save
 unlet s:cpo_save
