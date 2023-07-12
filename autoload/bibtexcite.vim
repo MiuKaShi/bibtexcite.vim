@@ -138,22 +138,13 @@ function! bibtexcite#showcite(citetype = "pandoc", bang = 0)
     endif
 endfunction
 
-function! bibtexcite#echocite(citetype = "pandoc", bang = 0)
-    let bib = bibtexcite#getcite(a:citetype, a:bang)
-    let bib = system("tr -d '{}' " . bib . " ")
-    if len(bib) == 1
-        echo ""
-    else
-        echo bib
-    endif
-endfunction
-
 function! bibtexcite#openfile(citetype = "pandoc", bang = 0)
     let citekey = bibtexcite#getcitekey(a:citetype, a:bang)
     call jobstart("dmenupaper " . citekey . " ")
 endfunction
 
-function! bibtexcite#edit(citetype = "pandoc", bang = 0)
+function! bibtexcite#editfile(citetype = "pandoc", bang = 0)
+    let l:bibtexcite_bibfile = bibtexcite#get_bibfile()
     let citekey = bibtexcite#getcitekey(a:citetype, a:bang)
 	call jobstart('bib-edit ' . l:bibtexcite_bibfile . ' ' . citekey)
 endfunction
