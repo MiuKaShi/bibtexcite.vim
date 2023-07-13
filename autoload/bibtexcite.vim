@@ -149,5 +149,10 @@ function! bibtexcite#editfile(citetype = "pandoc", bang = 0)
 	call jobstart('bib-edit ' . l:bibtexcite_bibfile . ' ' . citekey)
 endfunction
 
+function! bibtexcite#note(citetype = "pandoc", bang = 0)
+    let citekey = bibtexcite#getcitekey(a:citetype, a:bang)
+    call jobstart("bib-note " . citekey . " ")
+endfunction
+
 let &cpo = s:cpo_save
 unlet s:cpo_save
